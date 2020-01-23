@@ -65,7 +65,7 @@ class sjekkLoggInnTest extends PHPUnit\Framework\TestCase {
         $this->assertTrue($ok);
 
 
-
+        //simen var her
 
     }
 }
