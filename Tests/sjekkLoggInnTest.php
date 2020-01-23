@@ -59,7 +59,7 @@ class sjekkLoggInnTest extends PHPUnit\Framework\TestCase {
         $personnummer = "12345678910";
         $passord = "HeiHei";
         $bank = new Bank(new BankDBStub());
-        // act
+        // act hei
         $ok = $bank->sjekkLoggInn($personnummer, $passord);
         // assertion
         $this->assertTrue($ok);
