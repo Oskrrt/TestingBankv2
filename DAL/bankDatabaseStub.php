@@ -96,4 +96,24 @@
             }
             return $vellykket;
         }
+
+        function registrerBetaling($kontoNr, $transaksjon) {
+            $betalinger = array();
+            if ($transaksjon->belop > 0) {
+                array_push($betalinger, "$transaksjon->fraTilKontonummer"."$transaksjon->belop"."$transaksjon->dato"."$transaksjon->melding"."$kontoNr"."1");
+            }
+            if (count($betalinger) !=0) {
+                $vellykket = true;
+            }
+            else {
+                $vellykket = false;
+            }
+            return $vellykket;
+
+            return true;
+        }
+
+        function hentBetalinger($personnummer) {
+            $betalinger = array();
+        }
     }
