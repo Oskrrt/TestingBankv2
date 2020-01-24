@@ -105,6 +105,25 @@
             $Konto1 = new konto();
             $Konto1->personnummer = $personnummer;
             $Konto1->kontonummer = 101010;
+            $kontoer[] = $Konto1;
+            
+            $Konto2 = new konto();
+            $Konto2->personnummer = $personnummer;
+            $Konto2->kontonummer = 202020;
+            $kontoer[] = $Konto2;
+            
+            return $kontoer;
+        }
+        
+        function hentSaldi($personnummer){
+            if ($personnummer == -1) {
+                return "Feil";
+            }
+            $kontoer = array();
+            
+            $Konto1 = new konto();
+            $Konto1->personnummer = $personnummer;
+            $Konto1->kontonummer = 101010;
             $Konto1->saldo = 3000;
             $Konto1->type = "Sparekonto";
             $Konto1->valuta = "NOK";
