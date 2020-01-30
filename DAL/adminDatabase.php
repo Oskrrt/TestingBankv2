@@ -8,6 +8,16 @@ class AdminDB
         $this->db=new mysqli("localhost","root","","bank");
         $this->db->set_charset("utf8");
     }
+
+    function hentEnKunde($personnummer)
+    {
+        $enKunde = new kunde();
+        $enKunde->personnummer =$personnummer;
+        $enKunde->navn = "Per Olsen";
+        $enKunde->adresse = "Osloveien 82, 0270 Oslo";
+        $enKunde->telefonnr="12345678";
+        return $enKunde;
+    }
     
     function hentAlleKunder()
     {

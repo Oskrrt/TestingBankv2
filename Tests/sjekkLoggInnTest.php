@@ -63,11 +63,20 @@ class sjekkLoggInnTest extends PHPUnit\Framework\TestCase {
         $ok = $bank->sjekkLoggInn($personnummer, $passord);
         // assertion
         $this->assertTrue($ok);
-
-
-
-
     }
+
+    public function testMislykketLoggInn() {
+        // arrange
+        $personnummer = "11119949123";
+        $passord = "FeilPassord";
+        $bank = new Bank(new BankDBStub());
+        // act
+        $ok = $bank->sjekkLoggInn($personnummer, $passord);
+        // assertion
+        $this->assertFalse($ok);
+    }
+
+
 }
 
 ?>
