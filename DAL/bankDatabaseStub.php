@@ -145,7 +145,7 @@
             $kontoer[] = $Konto2;
 
             return $kontoer;
-
+        }
             function hentKundeInfo($personnummer)
             {
 
@@ -219,5 +219,5 @@
                 }
 
             }
-        }
+
     }
