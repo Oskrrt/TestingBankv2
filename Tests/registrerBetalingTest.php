@@ -17,7 +17,7 @@ class registrerBetalingTest extends TestCase
 
         $ok = $bank->registrerBetaling($kontoNr, $transaksjon);
 
-        $this->assertTrue($ok);
+        $this->assertEquals("OK", $ok);
     }
 
     public function testMislykketBetaling() {
@@ -31,6 +31,6 @@ class registrerBetalingTest extends TestCase
 
         $ok = $bank->registrerBetaling($kontoNr, $transaksjon);
 
-        $this->assertFalse($ok);
+        $this->assertEquals("Feil",$ok);
     }
 }

@@ -90,9 +90,9 @@
 
         function sjekkLoggInn($innPersonnummer, $innPassord) {
             if ($innPersonnummer === "12345678910" && $innPassord === "HeiHei") {
-                $vellykket = true;
+                $vellykket = "OK";
             } else {
-                $vellykket = false;
+                $vellykket = "Feil";
             }
             return $vellykket;
         }
@@ -102,11 +102,11 @@
             if ($transaksjon->belop > 0) {
                 array_push($betalinger, "$transaksjon->fraTilKontonummer"."$transaksjon->belop"."$transaksjon->dato"."$transaksjon->melding"."$kontoNr"."1");
             }
-            if (count($betalinger) !=0) {
-                $vellykket = true;
+            if (count($betalinger) != 0) {
+                $vellykket = "OK";
             }
             else {
-                $vellykket = false;
+                $vellykket = "Feil";
             }
             return $vellykket;
 
@@ -115,5 +115,6 @@
 
         function hentBetalinger($personnummer) {
             $betalinger = array();
+
         }
     }
