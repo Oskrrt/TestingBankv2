@@ -2,9 +2,9 @@
 include_once '../Model/domeneModell.php';
 include_once '../BLL/bankLogikk.php';
 
-use PHPUnit\Framework\TestCase;
 
-class registrerBetalingTest extends TestCase
+
+class registrerBetalingTest extends PHPUnit\Framework\TestCase
 {
     public function testVellykketBetaling() {
         $kontoNr = 12345;
