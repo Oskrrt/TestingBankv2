@@ -96,6 +96,45 @@
             }
             return $vellykket;
         }
+        
+        function hentKundeInfo($personnummer) {
+            
+            $kunde = new kunde();
+            
+            if (count_chars($personnummer) != 11) {
+                return "Feil personnummer";
+            }
+            
+            $kunde->personnummer = "12345678910";
+            $kunde->fornavn = "Ola";
+            $kunde->etternavn = "Nordmann";
+            $kunde->adresse = "Storgata 1";
+            $kunde->telefonnr = "12345678";
+            $kunde->passord = "123abc";
+            $kunde->postnr = "0010";
+            $kunde->poststed = "Oslo";
+            
+            if ($personnummer == $kunde->personnummer) {
+            return $kunde;
+            }   
+        }
+        
+        function endreKundeInfo($kunde) {
+            
+           $kunde = new kunde();
+           
+           $kunde->personnummer = "12345678910";
+           $kunde->fornavn = "Ola";
+           $kunde->etternavn = "Nordmann";
+           $kunde->adresse = "Storgata 1";
+           $kunde->telefonnr = "12345678";
+           $kunde->passord = "123abc";
+           $kunde->postnr = "0010";
+           $kunde->poststed = "Oslo";
+         
+            
+        }
+        
 
         function registrerBetaling($kontoNr, $transaksjon) {
             $betalinger = array();
