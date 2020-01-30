@@ -19,7 +19,7 @@ class endreKundeInfoTest extends PHPUnit\Framework\TestCase {
         $kunde->poststed = "Alta";  
         
         //Act
-        $kunde1 = endreKundeInfo($kunde);
+        $kunde1 = $bank->endreKundeInfo($kunde);
         
         //Assert
         $this->assertEquals($kunde1, $kunde);
@@ -39,7 +39,7 @@ class endreKundeInfoTest extends PHPUnit\Framework\TestCase {
         $kunde->poststed = "";
         
         //Act
-        $kunde1 = endreKundeInfo($kunde);
+        $kunde1 = $bank->endreKundeInfo($kunde);
         
         //Assert
         $this->assertEquals($kunde1, $kunde);
