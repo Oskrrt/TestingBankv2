@@ -23,7 +23,7 @@ class hentKundeInfoTest extends PHPUnit\Framework\TestCase {
     {
        //Arrange
       $bank = new Bank(new BankDBStub());
-      $personnummer = "12345678911";
+      $personnummer = "1234567891";
         
        //Act
       $kunde = $bank->hentKundeInfo($personnummer);
@@ -35,7 +35,6 @@ class hentKundeInfoTest extends PHPUnit\Framework\TestCase {
     
     
 }
-
 
 
 ?>
