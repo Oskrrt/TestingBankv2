@@ -149,7 +149,7 @@
             
             $kunde = new kunde();
             
-            if (count_chars($personnummer) != 11) {
+            if (strlen($personnummer) != 11) {
                 return "Feil personnummer";
             }
             
@@ -164,7 +164,7 @@
             
             if ($personnummer == $kunde->personnummer) {
             return $kunde;
-            }   
+            }
         }
         
         function endreKundeInfo($kunde) {
@@ -201,6 +201,18 @@
         }
 
         function hentBetalinger($personnummer) {
+
             $betalinger = array();
+
+            $betalinger = array("12345", 400, "01-01-2020", "Nett januar 2020", 12345, 1);
+            if ($personnummer != "12345678910") {
+                return "Feil";
+            }
+            if ($betalinger[5] == 1) {
+                return $betalinger;
+            } else {
+                return "Feil";
+            }
+
         }
     }
