@@ -20,25 +20,19 @@ function __construct()
 function hentEnKunde($personnummer)
 {
     $enKunde = new kunde();
-    $enKunde->personnummer =$personnummer;
+    $enKunde->personnummer = "01010122344";
     $enKunde->navn = "Per Olsen";
     $enKunde->adresse = "Osloveien 82, 0270 Oslo";
     $enKunde->telefonnr="12345678";
-    return $enKunde;
-}
-/*
-function hentAlleKunder()
-{
-    $sql = "Select * from Kunde Left Join Poststed On Kunde.postnr = Poststed.postnr ";
-    $resultat = $this->db->query($sql);
-    $kunder = array();
-    while($rad = $resultat->fetch_object())
-    {
-        $kunder[]=$rad;
+
+    if ($personnummer == "01010122344"){
+        return $enKunde;
+    } else {
+        return "Feil";
     }
-    return $kunder;
+
 }
-*/
+
 function hentAlleKunder()
 {
     $alleKunder = array();
@@ -63,225 +57,127 @@ function hentAlleKunder()
     return $alleKunder;
 }
 
-/*function endreKundeInfo($kunde)
-{
-    $this->db->autocommit(false);
-    // Sjekk om nytt postnr ligger i Poststeds-tabellen, dersom ikke legg det inn
-    $sql = "Select * from Poststed Where Postnr = '$kunde->postnr'";
-    $resultat = $this->db->query($sql);
-    if($this->db->affected_rows!=1)
-    {
-        // ligger ikke i poststedstabellen
-        $sql = "Insert Into Poststed (Postnr, Poststed) Values ('$kunde->postnr','$kunde->poststed')";
-        $resultat = $this->db->query($sql);
-        if($this->db->affected_rows < 1)
-        {
-            $this->db->rollback();
-            return "Feil";
-        }
-    }
-    // oppdater Kunde-tabellen
-    $sql =  "Update Kunde Set Fornavn = '$kunde->fornavn', Etternavn = '$kunde->etternavn',";
-    $sql .= " Adresse = '$kunde->adresse', Postnr = '$kunde->postnr',";
-    $sql .= " Telefonnr = '$kunde->telefonnr', Passord ='$kunde->passord'";
-    $sql .= " Where Personnummer = '$kunde->personnummer'";
-    $resultat = $this->db->query($sql);
-    $this->db->commit();
-    return "OK";
-}*/
-
 function endreKundeInfo($kundeInn){
     $alleKunder = array();
-    $kunde1 = new Kunde();
-    $kunde1->personnummer ="01010122344";
-    $kunde1->navn = "Per Olsen";
-    $kunde1->adresse = "Osloveien 82 0270 Oslo";
-    $kunde1->telefonnr="12345678";
-    $alleKunder[]=$kunde1;
-    $kunde2 = new kunde();
-    $kunde2->personnummer ="01010122344";
-    $kunde2->navn = "Line Jensen";
-    $kunde2->adresse = "Askerveien 100, 1379 Asker";
-    $kunde2->telefonnr="92876789";
-    $alleKunder[]=$kunde2;
-    $kunde3 = new kunde();
-    $kunde3->personnummer ="02020233455";
-    $kunde3->navn = "Ole Olsen";
-    $kunde3->adresse = "Bærumsveien 23, 1234 Bærum";
-    $kunde3->telefonnr="99889988";
-    $alleKunder[]=$kunde3;
+    $kunde = new Kunde();
+    $kunde->personnummer = "01010122344";
+    $kunde->navn = "Per Olsen";
+    $kunde->adresse = "Osloveien 82 0270 Oslo";
+    $kunde->telefonnr = "12345678";
+    $alleKunder[0] = $kunde;
 
-    foreach ($alleKunder as $kunde){
-        if ($kunde->personnummer == $kundeInn->personnummer){
-            $kunde->personnummer = $kundeInn->personnummer;
-            $kunde->navn = $kundeInn->navn;
-            $kunde->adresse = $kundeInn->adresse;
-            $kunde->telefonnr = $kundeInn->telefonnr;
-            return true;
-        } else {
-            return "Kunnde ikke finne kunde";
-        }
-    }
-    return false;
-}
-
-/*function registrerKunde($kunde)
-{
-    $this->db->autocommit(false);
-    // Sjekk om nytt postnr ligger i Poststeds-tabellen, dersom ikke legg det inn
-    $sql = "Select * from Poststed Where Postnr = '$kunde->postnr'";
-    $resultat = $this->db->query($sql);
-    if($this->db->affected_rows!=1)
-    {
-        // ligger ikke i poststedstabellen
-        $sql = "Insert Into Poststed (Postnr, Poststed) Values ('$kunde->postnr','$kunde->poststed')";
-        $resultat = $this->db->query($sql);
-        if($this->db->affected_rows < 1)
-        {
-            $this->db->rollback();
-            return "Feil";
-        }
-    }
-
-    $sql = "Insert into Kunde (Personnummer,Fornavn,Etternavn,Adresse,Postnr,Telefonnr,Passord)";
-    $sql .= "Values ('$kunde->personnummer','$kunde->fornavn','$kunde->etternavn',"
-        . "'$kunde->adresse','$kunde->postnr','$kunde->telefonnr','$kunde->passord')";
-    $resultat = $this->db->query($sql);
-    if($this->db->affected_rows==1)
-    {
-        $this->db->commit();
+    if($kundeInn->personnummer == "01010122344") {
+        //endre info på $kunde fordi de har samme personnummer
+        $alleKunder[0] = $kundeInn;
         return "OK";
-    }
-    else
-    {
-        $this->db->rollback();
+    } else {
         return "Feil";
     }
-}*/
+}
+
 function registrerKunde($kunde){
-    $alleKunder = array();
-    $alleKunder[] = $kunde;
-    return "ok";
-}
-/*function slettKunde($personnummer)
-{
-    $sql = "Delete From Kunde Where Personnummer = '$personnummer'";
-    $resultat = $this->db->query($sql);
-    if($this->db->affected_rows==1)
-    {
+    if ($kunde->personnummer != null){
+        $alleKunder = array();
+        $alleKunder[] = $kunde;
         return "OK";
-    }
-    else
-    {
+    } else {
         return "Feil";
     }
-}*/
+
+}
 
 function slettKunde($personnummer){
-    $alleKunder = array();
-    $kunde1 = new Kunde();
-    $kunde1->personnummer ="01010122344";
-    $kunde1->navn = "Per Olsen";
-    $kunde1->adresse = "Osloveien 82 0270 Oslo";
-    $kunde1->telefonnr="12345678";
-    $alleKunder[]=$kunde1;
-    $kunde2 = new kunde();
-    $kunde2->personnummer ="01010122344";
-    $kunde2->navn = "Line Jensen";
-    $kunde2->adresse = "Askerveien 100, 1379 Asker";
-    $kunde2->telefonnr="92876789";
-    $alleKunder[]=$kunde2;
-    $kunde3 = new kunde();
-    $kunde3->personnummer ="02020233455";
-    $kunde3->navn = "Ole Olsen";
-    $kunde3->adresse = "Bærumsveien 23, 1234 Bærum";
-    $kunde3->telefonnr="99889988";
-    $alleKunder[]=$kunde3;
-
-
-    for ($i = 0; $i < count($alleKunder); $i++){
-        if ($alleKunder[$i]->personnummer == $personnummer){
-            unset($alleKunder[$i]);
-            return true;
-        } else {
-            return false;
-        }
-    }
-    return false;
-}
-
-/*function registerKonto($konto)
-{
-    $sql = "Select * from Kunde Where Personnummer = '$konto->personnummer'";
-    $resultat = $this->db->query($sql);
-    if($this->db->affected_rows!=1)
-    {
-        echo json_encode("Feil i personnummer");
-        die();
-    }
-    $sql = "Insert into Konto (Personnummer, Kontonummer, Saldo, Type, Valuta)";
-    $sql .= "Values ('$konto->personnummer','$konto->kontonummer','$konto->saldo',"
-        . "'$konto->type','$konto->valuta')";
-    $resultat = $this->db->query($sql);
-    if($this->db->affected_rows==1)
-    {
+    if ($personnummer == "01010122344"){
+        $alleKunder = array();
+        $kunde1 = new Kunde();
+        $kunde1->personnummer ="01010122344";
+        $kunde1->navn = "Per Olsen";
+        $kunde1->adresse = "Osloveien 82 0270 Oslo";
+        $kunde1->telefonnr="12345678";
+        $alleKunder[]=$kunde1;
+        unset($alleKunder[0]);
         return "OK";
-    }
-    else
-    {
+    } else{
         return "Feil";
     }
-}*/
+}
 
 function registrerKonto($konto){
+    if ($konto->personnr != null){
+        $alleKonto = array();
+        $alleKonto[] = $konto;
+        return "OK";
+    } else {
+        return "Feil";
+    }
 
 }
 
-/*function endreKonto($konto)
-{
-    $sql = "Select * from Kunde Where Personnummer = '$konto->personnummer'";
-    $resultat = $this->db->query($sql);
-    if($this->db->affected_rows!=1)
-    {
-        echo json_encode("Feil i personnummer");
-        die();
-    }
-    $sql = "Select * from Konto Where Kontonummer = '$konto->kontonummer'";
-    $resultat = $this->db->query($sql);
-    if($this->db->affected_rows!=1)
-    {
-        echo json_encode("Feil i kontonummer");
-        die();
+function endreKonto($nyKontoInfo){
+    if ($nyKontoInfo->personnr == "01010122344"){
+        $alleKonto = array();
+        $gammeKontoInfo = new konto();
+        $gammeKontoInfo->personnummer = "01010122344";
+        $gammeKontoInfo->kontonummer = "1";
+        $gammeKontoInfo->saldo = 200;
+        $gammeKontoInfo->transaksjoner = array();
+        $gammeKontoInfo->valuta = "NOK";
+
+        $alleKonto[0] = $gammeKontoInfo;
+
+        $alleKonto[0] = $nyKontoInfo;
+        return "OK";
+    } else {
+        return "Feil";
     }
 
-    $sql =  "Update Konto Set Personnummer = '$konto->personnummer', "
-        . "Kontonummer = '$konto->kontonummer', Type = '$konto->type', "
-        . "Saldo = '$konto->saldo', Valuta = '$konto->valuta' "
-        . "Where Kontonummer = '$konto->kontonummer'";
-    $resultat = $this->db->query($sql);
-    return "OK";
-}*/
-
-/*function hentAlleKonti()
-{
-    $sql = "Select * from Konto";
-    $resultat = $this->db->query($sql);
-    $konti=array();
-    while($rad = $resultat->fetch_object())
-    {
-        $konti[]=$rad;
-    }
-    return $konti;
-}*/
-/*function slettKonto($kontonummer)
-{
-    $sql = "Delete from Konto Where Kontonummer = '$kontonummer'";
-    $resultat = $this->db->query($sql);
-    if($this->db->affected_rows!=1)
-    {
-        echo json_encode("Feil kontonummer");
-        die();
-    }
-    return "OK";
 }
-*/
+
+function hentAlleKonti(){
+    $alleKonto = array();
+    $konto1 = new konto();
+    $konto1->personnummer = "01010122344";
+    $konto1->kontonummer = "1";
+    $konto1->saldo = 200;
+    $konto1->transaksjoner = array();
+    $konto1->valuta = "NOK";
+
+    $konto2 = new konto();
+    $konto2->personnummer = "11223344556";
+    $konto2->kontonummer = "2";
+    $konto2->saldo = 13;
+    $konto2->transaksjoner = array();
+    $konto2->valuta = "NOK";
+
+    $konto3 = new konto();
+    $konto3->personnummer = "22334455667";
+    $konto3->kontonummer = "3";
+    $konto3->saldo = 100000000;
+    $konto3->transaksjoner = array();
+    $konto3->valuta = "NOK";
+
+    $alleKonto [] = $konto1;
+    $alleKonto [] = $konto2;
+    $alleKonto [] = $konto3;
+
+    return $alleKonto;
+}
+
+function slettKonto($kontonummer){
+    if ($kontonummer == "01010122344"){
+        $alleKonto = array();
+        $konto = new konto();
+        $konto->personnummer = "01010122344";
+        $konto->kontonummer = "1";
+        $konto->saldo = 200;
+        $konto->transaksjoner = array();
+        $konto->valuta = "NOK";
+
+        $alleKonto[0] = $konto;
+        unset($alleKonto[0]);
+        return "OK";
+    } else {
+        return "Feil";
+    }
+
+}
