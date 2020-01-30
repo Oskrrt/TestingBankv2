@@ -90,9 +90,9 @@
 
         function sjekkLoggInn($innPersonnummer, $innPassord) {
             if ($innPersonnummer === "12345678910" && $innPassord === "HeiHei") {
-                $vellykket = true;
+                $vellykket = "OK";
             } else {
-                $vellykket = false;
+                $vellykket = "Feil";
             }
             return $vellykket;
         }
@@ -101,7 +101,7 @@
             
             $kunde = new kunde();
             
-            if (count_chars($personnummer) != 11) {
+            if (strlen($personnummer) != 11) {
                 return "Feil personnummer";
             }
             
@@ -116,23 +116,62 @@
             
             if ($personnummer == $kunde->personnummer) {
             return $kunde;
-            }   
+            }
         }
         
         function endreKundeInfo($kunde) {
             
-           $kunde = new kunde();
+           $kunde1 = new kunde();
            
-           $kunde->personnummer = "12345678910";
-           $kunde->fornavn = "Ola";
-           $kunde->etternavn = "Nordmann";
-           $kunde->adresse = "Storgata 1";
-           $kunde->telefonnr = "12345678";
-           $kunde->passord = "123abc";
-           $kunde->postnr = "0010";
-           $kunde->poststed = "Oslo";
-         
-            
+           $kunde1->personnummer = "12345678910";
+           $kunde1->fornavn = "Ola";
+           $kunde1->etternavn = "Nordmann";
+           $kunde1->adresse = "Storgata 1";
+           $kunde1->telefonnr = "12345678";
+           $kunde1->passord = "123abc";
+           $kunde1->postnr = "0010";
+           $kunde1->poststed = "Oslo";
+           
+           if ($kunde->personnummer = null || $kunde->fornavn = null || $kunde->etternavn = null || $kunde->adresse = null || $kunde->telefonnr = null || $kunde->passord = null || $kunde->postnr = null || $kunde->poststed = null) {
+               return "Ugyldig kundeinfo";
+           } else {
+               $kunde1->personnummer = $kunde->personnummer;
+               $kunde1->fornavn = $kunde->fornavn;
+               $kunde1->etternavn = $kunde->etternavn;
+               $kunde1->adresse = $kunde->adresse;
+               $kunde1->telefonnr = $kunde->telefonnr;
+               $kunde1->passord = $kunde->passord;
+               $kunde1->postnr = $kunde->postnr;
+               $kunde1->poststed = $kunde->poststed;
+           }             
         }
         
+
+        function registrerBetaling($kontoNr, $transaksjon) {
+            $betalinger = array();
+            if ($transaksjon->belop > 0) {
+                array_push($betalinger, "$transaksjon->fraTilKontonummer"."$transaksjon->belop"."$transaksjon->dato"."$transaksjon->melding"."$kontoNr"."1");
+            }
+            if (count($betalinger) != 0) {
+                $vellykket = "OK";
+            }
+            else {
+                $vellykket = "Feil";
+            }
+            return $vellykket;
+
+            return true;
+        }
+
+        function hentBetalinger($personnummer) {
+            $betalinger = array("12345", 400, "01-01-2020", "Nett januar 2020", 12345, 1);
+            if ($personnummer != "12345678910") {
+                return "Feil";
+            }
+            if ($betalinger[5] == 1) {
+                return $betalinger;
+            } else {
+                return "Feil";
+            }
+        }
     }
