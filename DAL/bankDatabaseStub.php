@@ -90,9 +90,9 @@
 
         function sjekkLoggInn($innPersonnummer, $innPassord) {
             if ($innPersonnummer === "12345678910" && $innPassord === "HeiHei") {
-                $vellykket = true;
+                $vellykket = "OK";
             } else {
-                $vellykket = false;
+                $vellykket = "Feil";
             }
             return $vellykket;
         }
@@ -144,5 +144,63 @@
             $kontoer[] = $Konto2;
             
             return $kontoer;
+
+          function hentKundeInfo($personnummer) {
+            
+            $kunde = new kunde();
+            
+            if (count_chars($personnummer) != 11) {
+                return "Feil personnummer";
+            }
+            
+            $kunde->personnummer = "12345678910";
+            $kunde->fornavn = "Ola";
+            $kunde->etternavn = "Nordmann";
+            $kunde->adresse = "Storgata 1";
+            $kunde->telefonnr = "12345678";
+            $kunde->passord = "123abc";
+            $kunde->postnr = "0010";
+            $kunde->poststed = "Oslo";
+            
+            if ($personnummer == $kunde->personnummer) {
+            return $kunde;
+            }   
+        }
+        
+        function endreKundeInfo($kunde) {
+            
+           $kunde = new kunde();
+           
+           $kunde->personnummer = "12345678910";
+           $kunde->fornavn = "Ola";
+           $kunde->etternavn = "Nordmann";
+           $kunde->adresse = "Storgata 1";
+           $kunde->telefonnr = "12345678";
+           $kunde->passord = "123abc";
+           $kunde->postnr = "0010";
+           $kunde->poststed = "Oslo";
+         
+            
+        }
+        
+
+        function registrerBetaling($kontoNr, $transaksjon) {
+            $betalinger = array();
+            if ($transaksjon->belop > 0) {
+                array_push($betalinger, "$transaksjon->fraTilKontonummer"."$transaksjon->belop"."$transaksjon->dato"."$transaksjon->melding"."$kontoNr"."1");
+            }
+            if (count($betalinger) != 0) {
+                $vellykket = "OK";
+            }
+            else {
+                $vellykket = "Feil";
+            }
+            return $vellykket;
+
+            return true;
+        }
+
+        function hentBetalinger($personnummer) {
+            $betalinger = array();
         }
     }
