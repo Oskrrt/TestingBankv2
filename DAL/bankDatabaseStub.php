@@ -101,7 +101,7 @@
             
             $kunde = new kunde();
             
-            if (count_chars($personnummer) != 11) {
+            if (strlen($personnummer) != 11) {
                 return "Feil personnummer";
             }
             
@@ -116,7 +116,7 @@
             
             if ($personnummer == $kunde->personnummer) {
             return $kunde;
-            }   
+            }
         }
         
         function endreKundeInfo($kunde) {
