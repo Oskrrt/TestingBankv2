@@ -37,5 +37,4 @@ class hentKundeInfoTest extends PHPUnit\Framework\TestCase {
 }
 
 
-
 ?>
