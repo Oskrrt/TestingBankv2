@@ -1,10 +1,17 @@
 <?php
+include_once '../BLL/bankLogikk.php';
+include_once '../Model/domeneModell.php';
 
-namespace TestsToRun\adminTests;
 
-use PHPUnit\Framework\TestCase;
+class hentAlleKunderTest extends PHPUnit\Framework\TestCase{
 
-class hentAlleKunderTest extends TestCase
-{
-
+    public function testVellykketHentAlleKunder(){
+        //arrange
+        $alleKunder = array();
+        $admin = new Admin(new adminDBStub());
+        //act
+        $alleKunder = $admin->hentAlleKunder();
+        //assert
+        $this->assertCount(3, $alleKunder);
+    }
 }

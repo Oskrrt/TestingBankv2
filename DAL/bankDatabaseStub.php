@@ -86,6 +86,57 @@
             return $konto;
         }
 
+        function hentKonti($personnummer)
+        {
+            if ($personnummer == -1) {
+                return "Feil";
+            }
+            $kontoer = array();
+            $Konto1 = new konto();
+            $Konto1->personnummer = $personnummer;
+            $Konto1->kontonummer = 101010;
+            $Konto1->saldo = 3000;
+            $Konto1->type = "Sparekonto";
+            $Konto1->valuta = "NOK";
+            $kontoer[] = $Konto1;
+
+            $Konto2 = new konto();
+            $Konto2->personnummer = $personnummer;
+            $Konto2->kontonummer = 202020;
+            $Konto2->saldo = 500;
+            $Konto2->type = "Brukskonto";
+            $Konto2->valuta = "NOK";
+            $kontoer[] = $Konto2;
+
+            return $kontoer;
+        }
+
+        function hentSaldi($personnummer)
+        {
+            if ($personnummer == -1) {
+                return "Feil";
+            }
+            $kontoer = array();
+
+            $Konto1 = new konto();
+            $Konto1->personnummer = $personnummer;
+            $Konto1->kontonummer = 101010;
+            $Konto1->saldo = 3000;
+            $Konto1->type = "Sparekonto";
+            $Konto1->valuta = "NOK";
+            $kontoer[] = $Konto1;
+
+            $Konto2 = new konto();
+            $Konto2->personnummer = $personnummer;
+            $Konto2->kontonummer = 202020;
+            $Konto2->saldo = 500;
+            $Konto2->type = "Brukskonto";
+            $Konto2->valuta = "NOK";
+            $kontoer[] = $Konto2;
+
+            return $kontoer;
+        }
+
         function sjekkLoggInn($innPersonnummer, $innPassord)
         {
             if ($innPersonnummer === "12345678910" && $innPassord === "HeiHei") {
@@ -95,7 +146,8 @@
             }
             return $vellykket;
         }
-        
+
+
         function hentKundeInfo($personnummer) {
             
             $kunde = new kunde();
@@ -159,8 +211,6 @@
                 $vellykket = "Feil";
             }
             return $vellykket;
-
-            return true;
         }
 
         function hentBetalinger($personnummer) {
