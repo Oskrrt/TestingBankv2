@@ -3,7 +3,7 @@
 include_once '../BLL/bankLogikk.php';
 include_once '../Model/domeneModell.php';
 
-class endreKundeInfoTest extends PHPUnit\Framework\TestCase {
+class endreKundeInfoBankDatabaseTest extends PHPUnit\Framework\TestCase {
     
     public function testRiktigKundeInfo() {
         //Arrange

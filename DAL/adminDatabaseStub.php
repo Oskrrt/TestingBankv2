@@ -88,7 +88,7 @@ class adminDBStub{
     }
 
     function registrerKonto($konto){
-        if ($konto->personnr != null){
+        if ($konto->personnummer != null){
             $alleKonto = array();
             $alleKonto[] = $konto;
             return "OK";
@@ -99,7 +99,7 @@ class adminDBStub{
     }
 
     function endreKonto($nyKontoInfo){
-        if ($nyKontoInfo->personnr == "01010122344"){
+        if ($nyKontoInfo->personnummer == "01010122344"){
             $alleKonto = array();
             $gammeKontoInfo = new konto();
             $gammeKontoInfo->personnummer = "01010122344";

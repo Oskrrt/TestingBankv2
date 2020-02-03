@@ -1,5 +1,5 @@
 <?php
-include_once '../BLL/bankLogikk.php';
+include_once '../BLL/adminLogikk.php';
 include_once '../Model/domeneModell.php';
 
 
@@ -14,4 +14,6 @@ class hentAlleKunderTest extends PHPUnit\Framework\TestCase{
         //assert
         $this->assertCount(3, $alleKunder);
     }
+
+
 }

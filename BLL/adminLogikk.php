@@ -15,7 +15,12 @@ class Admin
             $this->db=$innDb;
         }
     }
-    
+
+    function hentEnKunde($personnr){
+        $kunde = $this->db->hentEnKunde($personnr);
+        return $kunde;
+    }
+
     function hentAlleKunder()
     {
         $kunder= $this->db->hentAlleKunder();
@@ -42,7 +47,7 @@ class Admin
     
     function registrerKonto($konto)
     {
-        $OK = $this->db->registerKonto($konto);
+        $OK = $this->db->registrerKonto($konto);
         return $OK;
     }
     
