@@ -224,4 +224,12 @@
                 return "Feil";
             }
         }
+
+        function utforBetaling($TxId) {
+            if ($TxId === 1) {
+                return "OK";
+            } else {
+                return "Feil";
+            }
+        }
     }

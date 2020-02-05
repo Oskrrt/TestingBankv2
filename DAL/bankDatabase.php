@@ -1,5 +1,5 @@
 <?php
-include_once '../Model/domeneModell.php';
+include_once '../../Model/domeneModell.php';
 class BankDB
 {
     private $db;
