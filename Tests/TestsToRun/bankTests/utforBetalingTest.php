@@ -25,4 +25,12 @@ class utforBetalingTest extends TestCase
 
         $this->assertEquals("Feil", $ok);
     }
+
+    public function testGyldigBelop() {
+        $TxId = 1;
+        $bank = new Bank(new BankDBStub());
+        $ok = $bank->utforBetaling($TxId);
+        $this->assertEquals("OK", $ok);
+
+    }
 }

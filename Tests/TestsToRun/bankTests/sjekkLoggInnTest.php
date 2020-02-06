@@ -22,6 +22,7 @@ class sjekkLoggInnTest extends PHPUnit\Framework\TestCase {
         $personnummer = "fjwfh,welfe";
         $personnummer2 = "3456788";
         $personnummer3 = "#¤%&/((/";
+
         // act
 
         // assertion
@@ -30,6 +31,25 @@ class sjekkLoggInnTest extends PHPUnit\Framework\TestCase {
         $this->assertFalse((boolean)preg_match("/^[0-9]{11}$/", $personnummer3));
     }
 
+    public function testFeilLogginPnr() {
+        $personnummer = "#¤%&/((/";
+        $passord = "HeiHei";
+        $bank = new Bank(new BankDBStub());
+
+        $ok = $bank->sjekkLoggInn($personnummer, $passord);
+
+        $this->assertEquals("Feil i personnummer", $ok);
+    }
+
+    public function testFeilLogginPassord() {
+        $personnummer = "12345678910";
+        $passord = "1234";
+        $bank = new Bank(new BankDBStub());
+
+        $ok = $bank->sjekkLoggInn($personnummer, $passord);
+
+        $this->assertEquals("Feil i passord", $ok);
+    }
     public function testRiktigPassord() {
         //arrange
         $passord = "HeiHei";

@@ -194,10 +194,14 @@
         }
 
         function utforBetaling($TxId) {
-            if ($TxId === 1) {
+            $belop = 300;
+            $saldo = 420;
+            if ($TxId === 1 && $belop<$saldo) {
                 return "OK";
             } else {
                 return "Feil";
             }
+
+
         }
     }
