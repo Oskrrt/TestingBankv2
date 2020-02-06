@@ -1,7 +1,7 @@
 <?php
 
-include_once '../../Model/domeneModell.php';
-include_once '../../BLL/bankLogikk.php';
+include_once '../Model/domeneModell.php';
+include_once '../BLL/bankLogikk.php';
 
 class hentKundeInfoTest extends PHPUnit\Framework\TestCase {
     
@@ -19,11 +19,11 @@ class hentKundeInfoTest extends PHPUnit\Framework\TestCase {
         
     }
     
-    public function testFeilPersonnummer() 
+    public function testUgyldigPersonnummer()
     {
        //Arrange
       $bank = new Bank(new BankDBStub());
-      $personnummer = "1234567891";
+      $personnummer = "1234";
         
        //Act
       $kunde = $bank->hentKundeInfo($personnummer);
@@ -32,7 +32,17 @@ class hentKundeInfoTest extends PHPUnit\Framework\TestCase {
       $this->assertEquals("Feil personnummer", $kunde);   
         
     }
-    
+
+    public function testFeilPersonnummer(){
+        $bank = new Bank(new BankDBStub());
+        $personnummer = "11111111111";
+
+        //Act
+        $kunde = $bank->hentKundeInfo($personnummer);
+
+        //Assert
+        $this->assertEquals("Kunne ikke finne kunden", $kunde);
+    }
     
 }
 
