@@ -88,7 +88,7 @@ class adminDBStub{
     }
 
     function registrerKonto($konto){
-        if ($konto->personnummer != null){
+        if ($konto->personnummer == 11223344556){
             $alleKonto = array();
             $alleKonto[] = $konto;
             return "OK";
