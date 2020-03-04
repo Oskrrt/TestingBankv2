@@ -166,6 +166,7 @@ class BankDB
         $this->db->rollback();
         return "Feil";
     }
+
     function endreKundeInfo($kunde)
     {
         $this->db->autocommit(false);

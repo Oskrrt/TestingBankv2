@@ -3,7 +3,7 @@
 include_once '../BLL/bankLogikk.php';
 include_once '../Model/domeneModell.php';
 
-class endreKundeInfoTest extends PHPUnit\Framework\TestCase {
+class endreKundeInfoBankDatabaseTest extends PHPUnit\Framework\TestCase {
     
     public function testRiktigKundeInfo() {
         //Arrange
@@ -19,10 +19,10 @@ class endreKundeInfoTest extends PHPUnit\Framework\TestCase {
         $kunde->poststed = "Alta";  
         
         //Act
-        $kunde1 = $bank->endreKundeInfo($kunde);
+        $resultat = $bank->endreKundeInfo($kunde);
         
         //Assert
-        $this->assertEquals($kunde1, $kunde);
+        $this->assertEquals("OK", $resultat);
     }
     
     public function testFeilKundeInfo() {
@@ -31,7 +31,7 @@ class endreKundeInfoTest extends PHPUnit\Framework\TestCase {
         $kunde = new kunde();
         $kunde->personnummer = "34567890111";
         $kunde->fornavn = "";
-        $kunde->etternavn = "Olsen";
+        $kunde->etternavn = null;
         $kunde->adresse = "";
         $kunde->telefonnr = "12345678";
         $kunde->passord = "";
@@ -39,12 +39,11 @@ class endreKundeInfoTest extends PHPUnit\Framework\TestCase {
         $kunde->poststed = "";
         
         //Act
-        $kunde1 = $bank->endreKundeInfo($kunde);
+        $resultat = $bank->endreKundeInfo($kunde);
         
         //Assert
-        $this->assertEquals($kunde1, $kunde);
-        
+        $this->assertEquals("Ugyldig kundeinfo", $resultat);
     }
-    
-    
+
+
 }

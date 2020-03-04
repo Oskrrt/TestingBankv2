@@ -2,39 +2,6 @@
     include_once '../Model/domeneModell.php';
     class BankDBStub
     {
-        function hentEnKunde($personnummer)
-        {
-            $enKunde = new kunde();
-            $enKunde->personnummer = $personnummer;
-            $enKunde->navn = "Per Olsen";
-            $enKunde->adresse = "Osloveien 82, 0270 Oslo";
-            $enKunde->telefonnr = "12345678";
-            return $enKunde;
-        }
-
-        function hentAlleKunder()
-        {
-            $alleKunder = array();
-            $kunde1 = new kunde();
-            $kunde1->personnummer = "01010122344";
-            $kunde1->navn = "Per Olsen";
-            $kunde1->adresse = "Osloveien 82 0270 Oslo";
-            $kunde1->telefonnr = "12345678";
-            $alleKunder[] = $kunde1;
-            $kunde2 = new kunde();
-            $kunde2->personnummer = "01010122344";
-            $kunde2->navn = "Line Jensen";
-            $kunde2->adresse = "Askerveien 100, 1379 Asker";
-            $kunde2->telefonnr = "92876789";
-            $alleKunder[] = $kunde2;
-            $kunde3 = new kunde();
-            $kunde3->personnummer = "02020233455";
-            $kunde3->navn = "Ole Olsen";
-            $kunde3->adresse = "Bærumsveien 23, 1234 Bærum";
-            $kunde3->telefonnr = "99889988";
-            $alleKunder[] = $kunde3;
-            return $alleKunder;
-        }
 
         function hentTransaksjoner($kontoNr, $fraDato, $tilDato)
         {
@@ -86,6 +53,57 @@
             return $konto;
         }
 
+        function hentKonti($personnummer)
+        {
+            if ($personnummer == -1) {
+                return "Feil";
+            }
+            $kontoer = array();
+            $Konto1 = new konto();
+            $Konto1->personnummer = $personnummer;
+            $Konto1->kontonummer = 101010;
+            $Konto1->saldo = 3000;
+            $Konto1->type = "Sparekonto";
+            $Konto1->valuta = "NOK";
+            $kontoer[] = $Konto1;
+
+            $Konto2 = new konto();
+            $Konto2->personnummer = $personnummer;
+            $Konto2->kontonummer = 202020;
+            $Konto2->saldo = 500;
+            $Konto2->type = "Brukskonto";
+            $Konto2->valuta = "NOK";
+            $kontoer[] = $Konto2;
+
+            return $kontoer;
+        }
+
+        function hentSaldi($personnummer)
+        {
+            if ($personnummer == -1) {
+                return "Feil";
+            }
+            $kontoer = array();
+
+            $Konto1 = new konto();
+            $Konto1->personnummer = $personnummer;
+            $Konto1->kontonummer = 101010;
+            $Konto1->saldo = 3000;
+            $Konto1->type = "Sparekonto";
+            $Konto1->valuta = "NOK";
+            $kontoer[] = $Konto1;
+
+            $Konto2 = new konto();
+            $Konto2->personnummer = $personnummer;
+            $Konto2->kontonummer = 202020;
+            $Konto2->saldo = 500;
+            $Konto2->type = "Brukskonto";
+            $Konto2->valuta = "NOK";
+            $kontoer[] = $Konto2;
+
+            return $kontoer;
+        }
+
         function sjekkLoggInn($innPersonnummer, $innPassord)
         {
             if ($innPersonnummer === "12345678910" && $innPassord === "HeiHei") {
@@ -95,7 +113,8 @@
             }
             return $vellykket;
         }
-        
+
+
         function hentKundeInfo($personnummer) {
             
             $kunde = new kunde();
@@ -115,11 +134,15 @@
             
             if ($personnummer == $kunde->personnummer) {
             return $kunde;
+            } else {
+                return "Kunne ikke finne kunden";
             }
         }
         
         function endreKundeInfo($kunde) {
-            
+            if ($kunde->personnummer == null || $kunde->fornavn == null || $kunde->etternavn == null || $kunde->adresse == null || $kunde->telefonnr == null || $kunde->passord == null || $kunde->postnr == null || $kunde->poststed == null) {
+                return "Ugyldig kundeinfo";
+            }
            $kunde1 = new kunde();
            
            $kunde1->personnummer = "12345678910";
@@ -131,20 +154,19 @@
            $kunde1->postnr = "0010";
            $kunde1->poststed = "Oslo";
            
-           if ($kunde->personnummer = null || $kunde->fornavn = null || $kunde->etternavn = null || $kunde->adresse = null || $kunde->telefonnr = null || $kunde->passord = null || $kunde->postnr = null || $kunde->poststed = null) {
-               return "Ugyldig kundeinfo";
-           } else {
-               $kunde1->personnummer = $kunde->personnummer;
-               $kunde1->fornavn = $kunde->fornavn;
-               $kunde1->etternavn = $kunde->etternavn;
-               $kunde1->adresse = $kunde->adresse;
-               $kunde1->telefonnr = $kunde->telefonnr;
-               $kunde1->passord = $kunde->passord;
-               $kunde1->postnr = $kunde->postnr;
-               $kunde1->poststed = $kunde->poststed;
-               return $kunde1;
-           }             
-        }
+
+           $kunde1->personnummer = $kunde->personnummer;
+           $kunde1->fornavn = $kunde->fornavn;
+           $kunde1->etternavn = $kunde->etternavn;
+           $kunde1->adresse = $kunde->adresse;
+           $kunde1->telefonnr = $kunde->telefonnr;
+           $kunde1->passord = $kunde->passord;
+           $kunde1->postnr = $kunde->postnr;
+           $kunde1->poststed = $kunde->poststed;
+           return "OK";
+       }
+
+
         
 
         function registrerBetaling($kontoNr, $transaksjon) {
@@ -159,8 +181,6 @@
                 $vellykket = "Feil";
             }
             return $vellykket;
-
-            return true;
         }
 
         function hentBetalinger($personnummer) {
@@ -168,10 +188,20 @@
             if ($personnummer != "12345678910") {
                 return "Feil";
             }
-            if ($betalinger[5] == 1) {
+            else {
                 return $betalinger;
+            }
+        }
+
+        function utforBetaling($TxId) {
+            $belop = 300;
+            $saldo = 420;
+            if ($TxId === 1 && $belop<$saldo) {
+                return "OK";
             } else {
                 return "Feil";
             }
+
+
         }
     }
